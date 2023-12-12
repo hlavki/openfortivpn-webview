@@ -11,7 +11,7 @@ public:
     explicit WebPage(QWebEngineProfile *profile, QObject *parent = nullptr);
 
 protected:
-    bool certificateError(const QWebEngineCertificateError &error) override;
+    void certificateError(const QWebEngineCertificateError &certificateError) override;
 };
 
 #endif // WEBPAGE_H
