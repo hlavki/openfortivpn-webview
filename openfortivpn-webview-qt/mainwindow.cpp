@@ -20,7 +20,7 @@ MainWindow::MainWindow(const bool keepOpen,
                        QWidget *parent) :
     QMainWindow(parent),
     webEngineProfile(new QWebEngineProfile("vpn", parent)),
-    webEnginePage(new WebPage(webEngineProfile, parent))
+    webEnginePage(new WebPage(webEngineProfile, parent)),
     webEngine(new QWebEngineView(webEnginePage, parent)),
     urlToWaitForRegex(urlToWaitForRegex),
     keepOpen(keepOpen)
