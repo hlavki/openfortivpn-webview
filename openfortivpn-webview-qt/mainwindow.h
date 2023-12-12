@@ -22,6 +22,7 @@ private slots:
     void onCookieRemoved(const QNetworkCookie &cookie);
     void updateTitle(const QString &title);
     void handleUrlChange(const QUrl &url);
+    void onCertificateError(const QWebEngineCertificateError error);
 
 private:
     QWebEngineProfile *webEngineProfile;

@@ -136,11 +136,11 @@ void MainWindow::closeEvent(QCloseEvent *)
     QApplication::exit(keepOpen ? 0 : 1);
 }
 
-void MainWindow::onCertificateError(QWebEngineCertificateError error)
+void MainWindow::onCertificateError(const QWebEngineCertificateError error)
 {
-#if IGNORE_SSL_ERRORS   qWarning() << "WebPage:: ignoring certificate error: " << error.description();  
+// #if IGNORE_SSL_ERRORS   qWarning() << "WebPage:: ignoring certificate error: " << error.description();  
     auto mutableError = const_cast<QWebEngineCertificateError&>(error);
     mutableError.acceptCertificate();     
-#endif   
+// #endif   
     qCritical() << "MainWindow:: certificate error: " << error.description();
 }
