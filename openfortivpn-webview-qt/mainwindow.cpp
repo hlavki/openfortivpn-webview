@@ -48,7 +48,7 @@ MainWindow::MainWindow(const bool keepOpen,
     connect(webEngineProfile->cookieStore(), &QWebEngineCookieStore::cookieRemoved, this,
             &MainWindow::onCookieRemoved);
   
-    QObject::connect(&webEnginePage, &QWebEnginePage::certificateError, [](QWebEngineCertificateError e) { e.acceptCertificate(); });
+    QObject::connect(webEnginePage, &QWebEnginePage::certificateError, [](QWebEngineCertificateError e) { e.acceptCertificate(); });
 }
 
 MainWindow::~MainWindow()
