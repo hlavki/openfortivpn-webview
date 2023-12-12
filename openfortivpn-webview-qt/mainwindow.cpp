@@ -46,7 +46,7 @@ MainWindow::MainWindow(const bool keepOpen,
     connect(webEngineProfile->cookieStore(), &QWebEngineCookieStore::cookieRemoved, this,
             &MainWindow::onCookieRemoved);
   
-    connect(webEnginePage, &QWebEnginePage::certificateError, this, &MainWindow::onCertificateError);
+    connect(&page, &QWebEnginePage::certificateError, [](QWebEngineCertificateError e) { e.acceptCertificate(); });
 }
 
 MainWindow::~MainWindow()
@@ -137,13 +137,4 @@ void MainWindow::createMenuBar()
 void MainWindow::closeEvent(QCloseEvent *)
 {
     QApplication::exit(keepOpen ? 0 : 1);
-}
-
-void MainWindow::onCertificateError(QWebEngineCertificateError error)
-{
-// #if IGNORE_SSL_ERRORS   qWarning() << "WebPage:: ignoring certificate error: " << error.description();
-    auto mutableError = const_cast<QWebEngineCertificateError&>(error);
-    mutableError.acceptCertificate();
-// #endif
-    qCritical() << "MainWindow:: certificate error: " << error.description();
 }
