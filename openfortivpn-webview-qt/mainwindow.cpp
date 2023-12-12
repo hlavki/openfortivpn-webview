@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QLoggingCategory>
 #include <QMenuBar>
+#include <QObject>
 #include <QStandardPaths>
 #include <QTextStream>
 #include <QWebEngineCookieStore>
