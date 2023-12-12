@@ -3,7 +3,7 @@
 WebPage::WebPage(QWidget *parent) : QWebEnginePage(parent) {
 }
 
-void WebPage::certificateError(const QWebEngineCertificateError &error) {
+void WebPage::certificateError(const QWebEngineCertificateError &certificateError) {
     // TODO: conditional treatment
     // return error.isOverridable();
 }
