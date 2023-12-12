@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "webpage.h"
 #include <QApplication>
 #include <QDebug>
 #include <QLoggingCategory>
@@ -19,10 +20,12 @@ MainWindow::MainWindow(const bool keepOpen,
                        QWidget *parent) :
     QMainWindow(parent),
     webEngineProfile(new QWebEngineProfile("vpn", parent)),
-    webEngine(new QWebEngineView(webEngineProfile, parent)),
+    webEnginePage(new WebPage(webEngineProfile, parent))
+    webEngine(new QWebEngineView(webEnginePage, parent)),
     urlToWaitForRegex(urlToWaitForRegex),
     keepOpen(keepOpen)
 {
+
     setCentralWidget(webEngine);
 
     createMenuBar();
@@ -44,7 +47,7 @@ MainWindow::MainWindow(const bool keepOpen,
     connect(webEngineProfile->cookieStore(), &QWebEngineCookieStore::cookieRemoved, this,
             &MainWindow::onCookieRemoved);
   
-    connect(webEngine, &QWebEngineView::certificateError, this, &MainWindow::onCertificateError);
+    connect(webEngine, &WebPage::certificateError, this, &MainWindow::onCertificateError);
 }
 
 MainWindow::~MainWindow()

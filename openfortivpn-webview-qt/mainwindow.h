@@ -26,6 +26,7 @@ private slots:
 
 private:
     QWebEngineProfile *webEngineProfile;
+    QWebEnginePage *webEnginePage;
     QWebEngineView *webEngine;
     const QRegularExpression& urlToWaitForRegex;
     const bool keepOpen;
