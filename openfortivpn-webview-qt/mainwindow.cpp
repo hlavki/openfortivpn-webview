@@ -7,6 +7,7 @@
 #include <QTextStream>
 #include <QWebEngineCookieStore>
 #include <QWebEngineHistory>
+#include <QWebEnginePage>
 #include <QWebEngineProfile>
 #include <QWebEngineView>
 #include <QWebEngineCertificateError>
