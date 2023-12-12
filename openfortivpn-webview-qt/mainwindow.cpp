@@ -9,6 +9,7 @@
 #include <QWebEngineHistory>
 #include <QWebEngineProfile>
 #include <QWebEngineView>
+#include <QWebEngineCertificateError>
 #include <iostream>
 
 Q_LOGGING_CATEGORY(category, "webview")
@@ -42,6 +43,8 @@ MainWindow::MainWindow(const bool keepOpen,
             &MainWindow::onCookieAdded);
     connect(webEngineProfile->cookieStore(), &QWebEngineCookieStore::cookieRemoved, this,
             &MainWindow::onCookieRemoved);
+  
+    connect(webEngine, &QWebEngineView::certificateError, this, &MainWindow::onCertificateError);
 }
 
 MainWindow::~MainWindow()
@@ -131,4 +134,13 @@ void MainWindow::createMenuBar()
 void MainWindow::closeEvent(QCloseEvent *)
 {
     QApplication::exit(keepOpen ? 0 : 1);
+}
+
+void MainWindow::onCertificateError(QWebEngineCertificateError error)
+{
+#if IGNORE_SSL_ERRORS   qWarning() << "WebPage:: ignoring certificate error: " << error.description();  
+    auto mutableError = const_cast<QWebEngineCertificateError&>(error);
+    mutableError.acceptCertificate();     
+#endif   
+    qCritical() << "MainWindow:: certificate error: " << error.description();
 }
